@@ -1,0 +1,19 @@
+{
+  "version": "36.0.18",
+  "files": {
+    "d95ccfad4a8d26d4a228a583387b721a77a7e6f1716fc5d854b68f927ec3f596": {
+      "source": {
+        "path": "DynamoDBTableStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "d95ccfad4a8d26d4a228a583387b721a77a7e6f1716fc5d854b68f927ec3f596.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

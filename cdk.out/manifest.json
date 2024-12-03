@@ -1,0 +1,305 @@
+{
+  "version": "36.0.18",
+  "artifacts": {
+    "DynamoDBTableStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "DynamoDBTableStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "DynamoDBTableStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "DynamoDBTableStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d95ccfad4a8d26d4a228a583387b721a77a7e6f1716fc5d854b68f927ec3f596.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "DynamoDBTableStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "DynamoDBTableStack.assets"
+      ],
+      "metadata": {
+        "/DynamoDBTableStack/weather_table/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "weathertable06CF1374"
+          }
+        ],
+        "/DynamoDBTableStack/DynamoDbTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDbTableName"
+          }
+        ],
+        "/DynamoDBTableStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/DynamoDBTableStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/DynamoDBTableStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/DynamoDBTableStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "DynamoDBTableStack"
+    },
+    "NorcalLnlCdkStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "NorcalLnlCdkStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "NorcalLnlCdkStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "NorcalLnlCdkStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/02e02497d3c438ec6c48cfa27ff8d5c93b8e0a38124b26937dea9670d40fb45c.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "NorcalLnlCdkStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "NorcalLnlCdkStack.assets"
+      ],
+      "metadata": {
+        "/NorcalLnlCdkStack/weather_api_key/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "weatherapikey81865B4E"
+          }
+        ],
+        "/NorcalLnlCdkStack/OpenWeatherMap/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OpenWeatherMapServiceRole996E3A50"
+          }
+        ],
+        "/NorcalLnlCdkStack/OpenWeatherMap/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OpenWeatherMapServiceRoleDefaultPolicy0DB7AAC0"
+          }
+        ],
+        "/NorcalLnlCdkStack/OpenWeatherMap/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OpenWeatherMap10BF00AE"
+          }
+        ],
+        "/NorcalLnlCdkStack/OpenWeatherMap/Invoke-permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OpenWeatherMapInvokepermissionF146E9F1"
+          }
+        ],
+        "/NorcalLnlCdkStack/openweather/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "openweatherC8C7F6ED"
+          }
+        ],
+        "/NorcalLnlCdkStack/openweather/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "openweatherDeployment884412B809afaaff4d49ffc72524a4677836eef5"
+          }
+        ],
+        "/NorcalLnlCdkStack/openweather/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "openweatherDeploymentStageprod42B8DB84"
+          }
+        ],
+        "/NorcalLnlCdkStack/openweather/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "openweatherEndpoint057ECD7B"
+          }
+        ],
+        "/NorcalLnlCdkStack/openweather/Default/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "openweatherOPTIONS9F7534C7"
+          }
+        ],
+        "/NorcalLnlCdkStack/openweather/Default/GET/ApiPermission.NorcalLnlCdkStackopenweatherAD6C0C6E.GET..": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "openweatherGETApiPermissionNorcalLnlCdkStackopenweatherAD6C0C6EGETAF4159F9"
+          }
+        ],
+        "/NorcalLnlCdkStack/openweather/Default/GET/ApiPermission.Test.NorcalLnlCdkStackopenweatherAD6C0C6E.GET..": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "openweatherGETApiPermissionTestNorcalLnlCdkStackopenweatherAD6C0C6EGET6165F269"
+          }
+        ],
+        "/NorcalLnlCdkStack/openweather/Default/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "openweatherGET0414E382"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/Rendered/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterRenderedServiceRole254DB4EA"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/Rendered/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterRenderedServiceRoleDefaultPolicy9ADB8C83"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/Rendered/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterRendered9C783E45"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterViewerEndpoint5A0EF326"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterViewerEndpointDeployment1CE7C57673ce3f8c67e9addb323150e51cbb0233"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterViewerEndpointDeploymentStageprodF3901FC7"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterViewerEndpointCA1B1E4B"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/{proxy+}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterViewerEndpointproxy2F4C239F"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/{proxy+}/ANY/ApiPermission.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..{proxy+}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterViewerEndpointproxyANYApiPermissionNorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0EANYproxy584C9E50"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/{proxy+}/ANY/ApiPermission.Test.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..{proxy+}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterViewerEndpointproxyANYApiPermissionTestNorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0EANYproxy65C49A22"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/{proxy+}/ANY/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterViewerEndpointproxyANYFF4B8F5B"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/ANY/ApiPermission.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterViewerEndpointANYApiPermissionNorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0EANY1FC54A4B"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/ANY/ApiPermission.Test.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterViewerEndpointANYApiPermissionTestNorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0EANY1BEDDC53"
+          }
+        ],
+        "/NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/ANY/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ViewHitCounterViewerEndpointANY66F2285B"
+          }
+        ],
+        "/NorcalLnlCdkStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/NorcalLnlCdkStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/NorcalLnlCdkStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/NorcalLnlCdkStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "NorcalLnlCdkStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

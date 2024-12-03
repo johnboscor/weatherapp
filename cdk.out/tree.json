@@ -1,0 +1,1448 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "DynamoDBTableStack": {
+        "id": "DynamoDBTableStack",
+        "path": "DynamoDBTableStack",
+        "children": {
+          "weather_table": {
+            "id": "weather_table",
+            "path": "DynamoDBTableStack/weather_table",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "DynamoDBTableStack/weather_table/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                  "aws:cdk:cloudformation:props": {
+                    "attributeDefinitions": [
+                      {
+                        "attributeName": "zip",
+                        "attributeType": "S"
+                      }
+                    ],
+                    "keySchema": [
+                      {
+                        "attributeName": "zip",
+                        "keyType": "HASH"
+                      }
+                    ],
+                    "provisionedThroughput": {
+                      "readCapacityUnits": 5,
+                      "writeCapacityUnits": 5
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                  "version": "2.154.1"
+                }
+              },
+              "ScalingRole": {
+                "id": "ScalingRole",
+                "path": "DynamoDBTableStack/weather_table/ScalingRole",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.154.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+              "version": "2.154.1"
+            }
+          },
+          "DynamoDbTableName": {
+            "id": "DynamoDbTableName",
+            "path": "DynamoDBTableStack/DynamoDbTableName",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.154.1"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "DynamoDBTableStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "DynamoDBTableStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.154.1"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "DynamoDBTableStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.154.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "DynamoDBTableStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.154.1"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "DynamoDBTableStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.154.1"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.154.1"
+        }
+      },
+      "NorcalLnlCdkStack": {
+        "id": "NorcalLnlCdkStack",
+        "path": "NorcalLnlCdkStack",
+        "children": {
+          "table": {
+            "id": "table",
+            "path": "NorcalLnlCdkStack/table",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_dynamodb.TableBase",
+              "version": "2.154.1"
+            }
+          },
+          "weather_api_key": {
+            "id": "weather_api_key",
+            "path": "NorcalLnlCdkStack/weather_api_key",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "NorcalLnlCdkStack/weather_api_key/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SecretsManager::Secret",
+                  "aws:cdk:cloudformation:props": {
+                    "generateSecretString": {},
+                    "name": "weather_api_key"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_secretsmanager.CfnSecret",
+                  "version": "2.154.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_secretsmanager.Secret",
+              "version": "2.154.1"
+            }
+          },
+          "OpenWeatherMap": {
+            "id": "OpenWeatherMap",
+            "path": "NorcalLnlCdkStack/OpenWeatherMap",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "NorcalLnlCdkStack/OpenWeatherMap/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "NorcalLnlCdkStack/OpenWeatherMap/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.154.1"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "NorcalLnlCdkStack/OpenWeatherMap/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.154.1"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "NorcalLnlCdkStack/OpenWeatherMap/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "NorcalLnlCdkStack/OpenWeatherMap/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "secretsmanager:DescribeSecret",
+                                    "secretsmanager:GetSecretValue"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Ref": "weatherapikey81865B4E"
+                                  }
+                                },
+                                {
+                                  "Action": [
+                                    "dynamodb:BatchGetItem",
+                                    "dynamodb:BatchWriteItem",
+                                    "dynamodb:ConditionCheckItem",
+                                    "dynamodb:DeleteItem",
+                                    "dynamodb:DescribeTable",
+                                    "dynamodb:GetItem",
+                                    "dynamodb:GetRecords",
+                                    "dynamodb:GetShardIterator",
+                                    "dynamodb:PutItem",
+                                    "dynamodb:Query",
+                                    "dynamodb:Scan",
+                                    "dynamodb:UpdateItem"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":dynamodb:",
+                                          {
+                                            "Ref": "AWS::Region"
+                                          },
+                                          ":",
+                                          {
+                                            "Ref": "AWS::AccountId"
+                                          },
+                                          ":table/",
+                                          {
+                                            "Fn::ImportValue": "DynamoDbTableName"
+                                          }
+                                        ]
+                                      ]
+                                    },
+                                    {
+                                      "Ref": "AWS::NoValue"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "OpenWeatherMapServiceRoleDefaultPolicy0DB7AAC0",
+                            "roles": [
+                              {
+                                "Ref": "OpenWeatherMapServiceRole996E3A50"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.154.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.154.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.154.1"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "NorcalLnlCdkStack/OpenWeatherMap/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "NorcalLnlCdkStack/OpenWeatherMap/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.154.1"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "NorcalLnlCdkStack/OpenWeatherMap/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.154.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.154.1"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "NorcalLnlCdkStack/OpenWeatherMap/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "0986e1dcd59e2d90a650688f67e9e8ce6f0cca81c18ec762881bce829d135f68.zip"
+                    },
+                    "environment": {
+                      "variables": {
+                        "REGION": {
+                          "Ref": "AWS::Region"
+                        },
+                        "SECRET_NAME": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::Split": [
+                                "-",
+                                {
+                                  "Fn::Select": [
+                                    6,
+                                    {
+                                      "Fn::Split": [
+                                        ":",
+                                        {
+                                          "Ref": "weatherapikey81865B4E"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "DYNAMO_DB_TABLE": {
+                          "Fn::ImportValue": "DynamoDbTableName"
+                        }
+                      }
+                    },
+                    "handler": "open_weather.lambda_handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "OpenWeatherMapServiceRole996E3A50",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.11",
+                    "timeout": 300
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.154.1"
+                }
+              },
+              "Invoke-permission": {
+                "id": "Invoke-permission",
+                "path": "NorcalLnlCdkStack/OpenWeatherMap/Invoke-permission",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "OpenWeatherMap10BF00AE",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "*"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                  "version": "2.154.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.154.1"
+            }
+          },
+          "openweather": {
+            "id": "openweather",
+            "path": "NorcalLnlCdkStack/openweather",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "NorcalLnlCdkStack/openweather/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
+                  "aws:cdk:cloudformation:props": {
+                    "name": "openweather"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.CfnRestApi",
+                  "version": "2.154.1"
+                }
+              },
+              "Deployment": {
+                "id": "Deployment",
+                "path": "NorcalLnlCdkStack/openweather/Deployment",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "NorcalLnlCdkStack/openweather/Deployment/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
+                      "aws:cdk:cloudformation:props": {
+                        "description": "Automatically created by the RestApi construct",
+                        "restApiId": {
+                          "Ref": "openweatherC8C7F6ED"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnDeployment",
+                      "version": "2.154.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.Deployment",
+                  "version": "2.154.1"
+                }
+              },
+              "DeploymentStage.prod": {
+                "id": "DeploymentStage.prod",
+                "path": "NorcalLnlCdkStack/openweather/DeploymentStage.prod",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "NorcalLnlCdkStack/openweather/DeploymentStage.prod/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "deploymentId": {
+                          "Ref": "openweatherDeployment884412B809afaaff4d49ffc72524a4677836eef5"
+                        },
+                        "restApiId": {
+                          "Ref": "openweatherC8C7F6ED"
+                        },
+                        "stageName": "prod"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnStage",
+                      "version": "2.154.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.Stage",
+                  "version": "2.154.1"
+                }
+              },
+              "Endpoint": {
+                "id": "Endpoint",
+                "path": "NorcalLnlCdkStack/openweather/Endpoint",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.154.1"
+                }
+              },
+              "Default": {
+                "id": "Default",
+                "path": "NorcalLnlCdkStack/openweather/Default",
+                "children": {
+                  "OPTIONS": {
+                    "id": "OPTIONS",
+                    "path": "NorcalLnlCdkStack/openweather/Default/OPTIONS",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "NorcalLnlCdkStack/openweather/Default/OPTIONS/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                          "aws:cdk:cloudformation:props": {
+                            "apiKeyRequired": false,
+                            "authorizationType": "NONE",
+                            "httpMethod": "OPTIONS",
+                            "integration": {
+                              "type": "MOCK",
+                              "requestTemplates": {
+                                "application/json": "{ statusCode: 200 }"
+                              },
+                              "integrationResponses": [
+                                {
+                                  "statusCode": "204",
+                                  "responseParameters": {
+                                    "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                                    "method.response.header.Access-Control-Allow-Origin": "'*'",
+                                    "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+                                  }
+                                }
+                              ]
+                            },
+                            "methodResponses": [
+                              {
+                                "statusCode": "204",
+                                "responseParameters": {
+                                  "method.response.header.Access-Control-Allow-Headers": true,
+                                  "method.response.header.Access-Control-Allow-Origin": true,
+                                  "method.response.header.Access-Control-Allow-Methods": true
+                                }
+                              }
+                            ],
+                            "resourceId": {
+                              "Fn::GetAtt": [
+                                "openweatherC8C7F6ED",
+                                "RootResourceId"
+                              ]
+                            },
+                            "restApiId": {
+                              "Ref": "openweatherC8C7F6ED"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                          "version": "2.154.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                      "version": "2.154.1"
+                    }
+                  },
+                  "GET": {
+                    "id": "GET",
+                    "path": "NorcalLnlCdkStack/openweather/Default/GET",
+                    "children": {
+                      "ApiPermission.NorcalLnlCdkStackopenweatherAD6C0C6E.GET..": {
+                        "id": "ApiPermission.NorcalLnlCdkStackopenweatherAD6C0C6E.GET..",
+                        "path": "NorcalLnlCdkStack/openweather/Default/GET/ApiPermission.NorcalLnlCdkStackopenweatherAD6C0C6E.GET..",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                          "aws:cdk:cloudformation:props": {
+                            "action": "lambda:InvokeFunction",
+                            "functionName": {
+                              "Fn::GetAtt": [
+                                "OpenWeatherMap10BF00AE",
+                                "Arn"
+                              ]
+                            },
+                            "principal": "apigateway.amazonaws.com",
+                            "sourceArn": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:",
+                                  {
+                                    "Ref": "AWS::Partition"
+                                  },
+                                  ":execute-api:",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "AWS::AccountId"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "openweatherC8C7F6ED"
+                                  },
+                                  "/",
+                                  {
+                                    "Ref": "openweatherDeploymentStageprod42B8DB84"
+                                  },
+                                  "/GET/"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                          "version": "2.154.1"
+                        }
+                      },
+                      "ApiPermission.Test.NorcalLnlCdkStackopenweatherAD6C0C6E.GET..": {
+                        "id": "ApiPermission.Test.NorcalLnlCdkStackopenweatherAD6C0C6E.GET..",
+                        "path": "NorcalLnlCdkStack/openweather/Default/GET/ApiPermission.Test.NorcalLnlCdkStackopenweatherAD6C0C6E.GET..",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                          "aws:cdk:cloudformation:props": {
+                            "action": "lambda:InvokeFunction",
+                            "functionName": {
+                              "Fn::GetAtt": [
+                                "OpenWeatherMap10BF00AE",
+                                "Arn"
+                              ]
+                            },
+                            "principal": "apigateway.amazonaws.com",
+                            "sourceArn": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:",
+                                  {
+                                    "Ref": "AWS::Partition"
+                                  },
+                                  ":execute-api:",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "AWS::AccountId"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "openweatherC8C7F6ED"
+                                  },
+                                  "/test-invoke-stage/GET/"
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                          "version": "2.154.1"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "NorcalLnlCdkStack/openweather/Default/GET/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                          "aws:cdk:cloudformation:props": {
+                            "authorizationType": "NONE",
+                            "httpMethod": "GET",
+                            "integration": {
+                              "type": "AWS_PROXY",
+                              "uri": {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":apigateway:",
+                                    {
+                                      "Ref": "AWS::Region"
+                                    },
+                                    ":lambda:path/2015-03-31/functions/",
+                                    {
+                                      "Fn::GetAtt": [
+                                        "OpenWeatherMap10BF00AE",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "/invocations"
+                                  ]
+                                ]
+                              },
+                              "integrationHttpMethod": "POST",
+                              "requestTemplates": {
+                                "application/json": "{ \"statusCode\": \"200\" }"
+                              }
+                            },
+                            "resourceId": {
+                              "Fn::GetAtt": [
+                                "openweatherC8C7F6ED",
+                                "RootResourceId"
+                              ]
+                            },
+                            "restApiId": {
+                              "Ref": "openweatherC8C7F6ED"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                          "version": "2.154.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                      "version": "2.154.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.ResourceBase",
+                  "version": "2.154.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_apigateway.RestApi",
+              "version": "2.154.1"
+            }
+          },
+          "ViewHitCounter": {
+            "id": "ViewHitCounter",
+            "path": "NorcalLnlCdkStack/ViewHitCounter",
+            "children": {
+              "Rendered": {
+                "id": "Rendered",
+                "path": "NorcalLnlCdkStack/ViewHitCounter/Rendered",
+                "children": {
+                  "ServiceRole": {
+                    "id": "ServiceRole",
+                    "path": "NorcalLnlCdkStack/ViewHitCounter/Rendered/ServiceRole",
+                    "children": {
+                      "ImportServiceRole": {
+                        "id": "ImportServiceRole",
+                        "path": "NorcalLnlCdkStack/ViewHitCounter/Rendered/ServiceRole/ImportServiceRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.154.1"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "NorcalLnlCdkStack/ViewHitCounter/Rendered/ServiceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                  ]
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.154.1"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "NorcalLnlCdkStack/ViewHitCounter/Rendered/ServiceRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "NorcalLnlCdkStack/ViewHitCounter/Rendered/ServiceRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "dynamodb:BatchGetItem",
+                                        "dynamodb:ConditionCheckItem",
+                                        "dynamodb:DescribeTable",
+                                        "dynamodb:GetItem",
+                                        "dynamodb:GetRecords",
+                                        "dynamodb:GetShardIterator",
+                                        "dynamodb:Query",
+                                        "dynamodb:Scan"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              "arn:",
+                                              {
+                                                "Ref": "AWS::Partition"
+                                              },
+                                              ":dynamodb:",
+                                              {
+                                                "Ref": "AWS::Region"
+                                              },
+                                              ":",
+                                              {
+                                                "Ref": "AWS::AccountId"
+                                              },
+                                              ":table/",
+                                              {
+                                                "Fn::ImportValue": "DynamoDbTableName"
+                                              }
+                                            ]
+                                          ]
+                                        },
+                                        {
+                                          "Ref": "AWS::NoValue"
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "ViewHitCounterRenderedServiceRoleDefaultPolicy9ADB8C83",
+                                "roles": [
+                                  {
+                                    "Ref": "ViewHitCounterRenderedServiceRole254DB4EA"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.154.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.154.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.154.1"
+                    }
+                  },
+                  "Code": {
+                    "id": "Code",
+                    "path": "NorcalLnlCdkStack/ViewHitCounter/Rendered/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "NorcalLnlCdkStack/ViewHitCounter/Rendered/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.154.1"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "NorcalLnlCdkStack/ViewHitCounter/Rendered/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.154.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.154.1"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "NorcalLnlCdkStack/ViewHitCounter/Rendered/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "code": {
+                          "s3Bucket": {
+                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                          },
+                          "s3Key": "d9cdd7bdd784d6248d9a68dc7b1e49029a879f67840bd9cd5a3fd41de8b64c15.zip"
+                        },
+                        "environment": {
+                          "variables": {
+                            "TABLE_NAME": {
+                              "Fn::ImportValue": "DynamoDbTableName"
+                            },
+                            "TITLE": "Weather Data By Zip Code",
+                            "SORT_BY": ""
+                          }
+                        },
+                        "handler": "index.handler",
+                        "role": {
+                          "Fn::GetAtt": [
+                            "ViewHitCounterRenderedServiceRole254DB4EA",
+                            "Arn"
+                          ]
+                        },
+                        "runtime": "nodejs18.x"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                      "version": "2.154.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.Function",
+                  "version": "2.154.1"
+                }
+              },
+              "ViewerEndpoint": {
+                "id": "ViewerEndpoint",
+                "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
+                      "aws:cdk:cloudformation:props": {
+                        "name": "ViewerEndpoint"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnRestApi",
+                      "version": "2.154.1"
+                    }
+                  },
+                  "Deployment": {
+                    "id": "Deployment",
+                    "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Deployment",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Deployment/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
+                          "aws:cdk:cloudformation:props": {
+                            "description": "Automatically created by the RestApi construct",
+                            "restApiId": {
+                              "Ref": "ViewHitCounterViewerEndpoint5A0EF326"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnDeployment",
+                          "version": "2.154.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Deployment",
+                      "version": "2.154.1"
+                    }
+                  },
+                  "DeploymentStage.prod": {
+                    "id": "DeploymentStage.prod",
+                    "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/DeploymentStage.prod",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/DeploymentStage.prod/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
+                          "aws:cdk:cloudformation:props": {
+                            "deploymentId": {
+                              "Ref": "ViewHitCounterViewerEndpointDeployment1CE7C57673ce3f8c67e9addb323150e51cbb0233"
+                            },
+                            "restApiId": {
+                              "Ref": "ViewHitCounterViewerEndpoint5A0EF326"
+                            },
+                            "stageName": "prod"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnStage",
+                          "version": "2.154.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Stage",
+                      "version": "2.154.1"
+                    }
+                  },
+                  "Endpoint": {
+                    "id": "Endpoint",
+                    "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Endpoint",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.154.1"
+                    }
+                  },
+                  "Default": {
+                    "id": "Default",
+                    "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default",
+                    "children": {
+                      "{proxy+}": {
+                        "id": "{proxy+}",
+                        "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/{proxy+}",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/{proxy+}/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                              "aws:cdk:cloudformation:props": {
+                                "parentId": {
+                                  "Fn::GetAtt": [
+                                    "ViewHitCounterViewerEndpoint5A0EF326",
+                                    "RootResourceId"
+                                  ]
+                                },
+                                "pathPart": "{proxy+}",
+                                "restApiId": {
+                                  "Ref": "ViewHitCounterViewerEndpoint5A0EF326"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                              "version": "2.154.1"
+                            }
+                          },
+                          "ANY": {
+                            "id": "ANY",
+                            "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/{proxy+}/ANY",
+                            "children": {
+                              "ApiPermission.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..{proxy+}": {
+                                "id": "ApiPermission.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..{proxy+}",
+                                "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/{proxy+}/ANY/ApiPermission.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..{proxy+}",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                                  "aws:cdk:cloudformation:props": {
+                                    "action": "lambda:InvokeFunction",
+                                    "functionName": {
+                                      "Fn::GetAtt": [
+                                        "ViewHitCounterRendered9C783E45",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "principal": "apigateway.amazonaws.com",
+                                    "sourceArn": {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":execute-api:",
+                                          {
+                                            "Ref": "AWS::Region"
+                                          },
+                                          ":",
+                                          {
+                                            "Ref": "AWS::AccountId"
+                                          },
+                                          ":",
+                                          {
+                                            "Ref": "ViewHitCounterViewerEndpoint5A0EF326"
+                                          },
+                                          "/",
+                                          {
+                                            "Ref": "ViewHitCounterViewerEndpointDeploymentStageprodF3901FC7"
+                                          },
+                                          "/*/*"
+                                        ]
+                                      ]
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                                  "version": "2.154.1"
+                                }
+                              },
+                              "ApiPermission.Test.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..{proxy+}": {
+                                "id": "ApiPermission.Test.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..{proxy+}",
+                                "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/{proxy+}/ANY/ApiPermission.Test.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..{proxy+}",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                                  "aws:cdk:cloudformation:props": {
+                                    "action": "lambda:InvokeFunction",
+                                    "functionName": {
+                                      "Fn::GetAtt": [
+                                        "ViewHitCounterRendered9C783E45",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "principal": "apigateway.amazonaws.com",
+                                    "sourceArn": {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":execute-api:",
+                                          {
+                                            "Ref": "AWS::Region"
+                                          },
+                                          ":",
+                                          {
+                                            "Ref": "AWS::AccountId"
+                                          },
+                                          ":",
+                                          {
+                                            "Ref": "ViewHitCounterViewerEndpoint5A0EF326"
+                                          },
+                                          "/test-invoke-stage/*/*"
+                                        ]
+                                      ]
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                                  "version": "2.154.1"
+                                }
+                              },
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/{proxy+}/ANY/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                                  "aws:cdk:cloudformation:props": {
+                                    "authorizationType": "NONE",
+                                    "httpMethod": "ANY",
+                                    "integration": {
+                                      "type": "AWS_PROXY",
+                                      "uri": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:",
+                                            {
+                                              "Ref": "AWS::Partition"
+                                            },
+                                            ":apigateway:",
+                                            {
+                                              "Ref": "AWS::Region"
+                                            },
+                                            ":lambda:path/2015-03-31/functions/",
+                                            {
+                                              "Fn::GetAtt": [
+                                                "ViewHitCounterRendered9C783E45",
+                                                "Arn"
+                                              ]
+                                            },
+                                            "/invocations"
+                                          ]
+                                        ]
+                                      },
+                                      "integrationHttpMethod": "POST"
+                                    },
+                                    "resourceId": {
+                                      "Ref": "ViewHitCounterViewerEndpointproxy2F4C239F"
+                                    },
+                                    "restApiId": {
+                                      "Ref": "ViewHitCounterViewerEndpoint5A0EF326"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                                  "version": "2.154.1"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                              "version": "2.154.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.ProxyResource",
+                          "version": "2.154.1"
+                        }
+                      },
+                      "ANY": {
+                        "id": "ANY",
+                        "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/ANY",
+                        "children": {
+                          "ApiPermission.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..": {
+                            "id": "ApiPermission.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..",
+                            "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/ANY/ApiPermission.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ViewHitCounterRendered9C783E45",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "ViewHitCounterViewerEndpoint5A0EF326"
+                                      },
+                                      "/",
+                                      {
+                                        "Ref": "ViewHitCounterViewerEndpointDeploymentStageprodF3901FC7"
+                                      },
+                                      "/*/"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.154.1"
+                            }
+                          },
+                          "ApiPermission.Test.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..": {
+                            "id": "ApiPermission.Test.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..",
+                            "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/ANY/ApiPermission.Test.NorcalLnlCdkStackViewHitCounterViewerEndpointCD195F0E.ANY..",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ViewHitCounterRendered9C783E45",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "ViewHitCounterViewerEndpoint5A0EF326"
+                                      },
+                                      "/test-invoke-stage/*/"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.154.1"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "NorcalLnlCdkStack/ViewHitCounter/ViewerEndpoint/Default/ANY/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "authorizationType": "NONE",
+                                "httpMethod": "ANY",
+                                "integration": {
+                                  "type": "AWS_PROXY",
+                                  "uri": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":apigateway:",
+                                        {
+                                          "Ref": "AWS::Region"
+                                        },
+                                        ":lambda:path/2015-03-31/functions/",
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ViewHitCounterRendered9C783E45",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/invocations"
+                                      ]
+                                    ]
+                                  },
+                                  "integrationHttpMethod": "POST"
+                                },
+                                "resourceId": {
+                                  "Fn::GetAtt": [
+                                    "ViewHitCounterViewerEndpoint5A0EF326",
+                                    "RootResourceId"
+                                  ]
+                                },
+                                "restApiId": {
+                                  "Ref": "ViewHitCounterViewerEndpoint5A0EF326"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                              "version": "2.154.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                          "version": "2.154.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.ResourceBase",
+                      "version": "2.154.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.LambdaRestApi",
+                  "version": "2.154.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "cdk-dynamo-table-viewer.TableViewer",
+              "version": "0.2.488"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "NorcalLnlCdkStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "NorcalLnlCdkStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.154.1"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "NorcalLnlCdkStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.154.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "NorcalLnlCdkStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.154.1"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "NorcalLnlCdkStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.154.1"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.154.1"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.3.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.154.1"
+    }
+  }
+}
